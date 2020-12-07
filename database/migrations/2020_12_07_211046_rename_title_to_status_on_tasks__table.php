@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameContentStatusTasks extends Migration
+class RenameTitleToStatusOnTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class RenameContentStatusTasks extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->renameColumn('content', 'status');
+           $table->renameColumn('title', 'status');
         });
     }
 
