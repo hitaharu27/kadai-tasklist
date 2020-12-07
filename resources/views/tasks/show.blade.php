@@ -10,15 +10,19 @@
             <td>{{ $task->id }}</td>
         </tr>
         <tr>
-            <th>タスク</th>
+            <th>タイトル</th>
+                <td>{{ $task->title }}</td>
+        </tr>
+        <tr>
+            <th>ステータス</th>
             <td>{{ $task->content }}</td>
         </tr>
-      </table>
+    </table>
 
-    {{-- メッセージ編集ページへのリンク --}}
-    {!! link_to_route('tasks.edit', 'このメッセージを編集', ['task' => $task->id], ['class' => 'btn btn-light']) !!}
+    {{-- ステータス編集ページへのリンク --}}
+    {!! link_to_route('tasks.edit', 'このステータスを編集', ['task' => $task->id], ['class' => 'btn btn-light']) !!}
 
-    {{-- メッセージ削除フォーム --}}
+    {{-- ステータス削除フォーム --}}
     {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
         {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}

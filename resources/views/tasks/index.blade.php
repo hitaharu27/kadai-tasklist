@@ -9,14 +9,16 @@
             <thead>
                 <tr>
                     <th>id</th>
-                    <th>タスク</th>
+                    <th>タイトル</th>
+                    <th>ステータス</th>
                 </tr>
             </thead>
             <tbody>
-               @foreach ($tasks as $task)
+                @foreach ($tasks as $task)
                 <tr>
-                    {{-- メッセージ詳細ページへのリンク --}}
+                    {{-- ステータス詳細ページへのリンク --}}
                     <td>{!! link_to_route('tasks.show', $task->id, ['task' => $task->id]) !!}</td>
+                    <td>{{ $task->title }}</td>
                     <td>{{ $task->content }}</td>
                 </tr>
                 @endforeach

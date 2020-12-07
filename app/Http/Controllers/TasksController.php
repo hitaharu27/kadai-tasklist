@@ -47,8 +47,15 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        // タスクを作成
+        // バリデーション
+        $request->validate([
+            'title' => 'required|max:10',   // 追加
+            'content' => 'required|max:10',
+        ]);
+
+        // メッセージを作成
         $task = new Task;
+        $task->title = $request->title;    // 追加
         $task->content = $request->content;
         $task->save();
 
@@ -98,19 +105,24 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+   public function update(Request $request, $id)
     {
+        // バリデーション
+        $request->validate([
+            'title' => 'required|max:10',   // 追加
+            'content' => 'required|max:10',
+        ]);
+
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
         // メッセージを更新
+        $task->title = $request->title;    // 追加
         $task->content = $request->content;
         $task->save();
 
         // トップページへリダイレクトさせる
         return redirect('/');
     }
-
-
     /**
      * Remove the specified resource from storage.
      *
