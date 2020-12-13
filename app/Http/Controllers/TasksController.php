@@ -79,13 +79,19 @@ class TasksController extends Controller
      */
    public function show($id)
     {
-        // idの値でタスクを検索して取得
+        //もし  $idがログインしているユーザーの作ったものだったら
         $task = Task::findOrFail($id);
-
-        // タスク詳細ビューでそれを表示
-        return view('tasks.show', [
+        $user = \Auth::user();
+        
+        if($task->user_id == $user->id) {
+            return view('tasks.show', [
             'task' => $task,
-        ]);
+            ]);
+        } else {
+            return redirect('/');
+        }
+       
+        
     }
 
 
@@ -99,11 +105,16 @@ class TasksController extends Controller
     {
         // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
+        $user = \Auth::user();
 
         // タスク編集ビューでそれを表示
+        if($task->user_id == $user->id) {
         return view('tasks.edit', [
             'task' => $task,
         ]);
+        } else {
+            return redirect('/');
+        }
     }
 
     /**
