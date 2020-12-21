@@ -7,19 +7,20 @@
     @if (count($tasks) > 0)
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>id</th>
-                    <th>タイトル</th>
-                    <th>ステータス</th>
+                <tr class="row">
+                    <th class="col-sm-1">完了</th>
+                    <th class="col-sm-8">タスク名</th>
+                    <th class="col-sm-3">期限</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($tasks as $task)
-                <tr>
-                    {{-- ステータス詳細ページへのリンク --}}
-                    <td>{!! link_to_route('tasks.show', $task->id, ['task' => $task->id]) !!}</td>
-                    <td>{{ $task->status }}</td>
-                    <td>{{ $task->content }}</td>
+                <tr class="row">
+                    <td class="col-sm-1">{!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
+                            <button type="submit">　</button>
+                        {!! Form::close() !!}</td>
+                    <td class="col-sm-8">{!! link_to_route('tasks.show', $task->title, ['task' => $task->id]) !!}</td>
+                    <td class="col-sm-3">{{ $task->limit }}</td>
                 </tr>
                 @endforeach
             </tbody>

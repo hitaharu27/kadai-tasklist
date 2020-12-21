@@ -40,7 +40,6 @@ class TasksController extends Controller
     {
         $task = new Task;
 
-        // タスク作成ビューを表示
         return view('tasks.create', [
             'task' => $task,
         ]);
@@ -54,20 +53,17 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        // バリデーション
         $request->validate([
-            'status' => 'required|max:10',   // 追加
-            'content' => 'required|max:10',
+            'title' => 'required|max:10',   // 追加
+            'limit' => 'required|max:10',
         ]);
 
-        // タスクを作成
         $request->user()->tasks()->create([
-            'status' => $request->status,
-            'content' => $request->content,
+            'title' => $request->title,
+            'limit' => $request->limit,
         ]);
 
 
-        // トップページへリダイレクトさせる
         return redirect('/');
     }
 
@@ -79,7 +75,6 @@ class TasksController extends Controller
      */
    public function show($id)
     {
-        //もし  $idがログインしているユーザーの作ったものだったら
         $task = Task::findOrFail($id);
         $user = \Auth::user();
         
@@ -128,15 +123,15 @@ class TasksController extends Controller
     {
         // バリデーション
         $request->validate([
-            'status' => 'required|max:10',   // 追加
-            'content' => 'required|max:10',
+            'title' => 'required|max:10',   // 追加
+            'limit' => 'required|max:10',
         ]);
 
         // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
         // タスクを更新
-        $task->status = $request->status;    // 追加
-        $task->content = $request->content;
+        $task->title = $request->title;    // 追加
+        $task->limit = $request->limit;
         $task->save();
 
         // トップページへリダイレクトさせる

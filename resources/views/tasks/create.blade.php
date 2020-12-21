@@ -9,13 +9,13 @@
            {!! Form::model($task, ['route' => 'tasks.store']) !!}
 
                 <div class="form-group">
-                    {!! Form::label('status', 'タイトル:') !!}
-                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('title', 'タスク名:') !!}
+                    {!! Form::text('title', null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('content', 'ステータス:') !!}
-                    {!! Form::text('content', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('limit', '期限:') !!}
+                    {!! Form::date('limit', \Carbon\Carbon::now()); !!}
                 </div>
 
                 {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}
